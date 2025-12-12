@@ -9,9 +9,12 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@supabase/auth-helpers-nextjs": "^0.15.0",
+    "@supabase/auth-helpers-react": "^0.15.0",
     "next": "16.0.10",
     "react": "19.2.1",
-    "react-dom": "19.2.1"
+    "react-dom": "19.2.1",
+    "supabase": "github:supabase/supabase-js"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
