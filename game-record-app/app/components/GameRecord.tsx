@@ -30,7 +30,7 @@ export const GameRecord = () => {
                     />
                 </form>
                 {openRecord &&(
-                    <div className="m-10 min-w-[70dvw] min-h-[60dvh]">
+                    <div className="m-10 min-w-[85dvw] min-h-[60dvh] md:min-w-[70dvw] md:min-h-[60dvh]">
                         <GameRecordList productId={productId}/>
                     </div>
                 )}

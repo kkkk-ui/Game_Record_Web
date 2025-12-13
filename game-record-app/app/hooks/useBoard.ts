@@ -2,13 +2,13 @@
 import { useCallback, useEffect, useState } from "react";
 import * as Query from "@/app/services/board";
 
-type board = {
+type Board = {
     readonly product_id: string;
     readonly board_id: string;
 }
 
 export const useBoard = (productId: string) => {
-    const [boards, setBoards] = useState<board[]>([]);
+    const [boards, setBoards] = useState<Board[]>([]);
     
     useEffect(() => {
         const fetchBoards = async () => {
