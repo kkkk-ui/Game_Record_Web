@@ -20,8 +20,10 @@ jobs:
         with:
           node-version: '20'        # nodeのバージョン20を指定
 
-      - name: Install dependencies
-        run: npm install            # 依存関係をインストール
+      - name: Install dependencies  # 依存関係をインストール
+        run: |
+          cd game-record-app 
+          npm install               
 
       - name: Build Next.js project
         run: npm run build          # ビルドする
