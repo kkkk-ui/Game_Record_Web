@@ -20,12 +20,12 @@ jobs:
         with:
           node-version: '20'        # nodeのバージョン20を指定
 
-      - name: Install dependencies  # 依存関係をインストール
-        run: |
-          cd game-record-app 
-          npm install               
+      - name: Install dependencies
+        working-directory: game-record-app
+        run: npm install            # 依存関係をインストール
 
       - name: Build Next.js project
+        working-directory: game-record-app
         run: npm run build          # ビルドする
 
       - name: Deploy to Vercel
