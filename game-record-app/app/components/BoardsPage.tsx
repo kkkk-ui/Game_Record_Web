@@ -17,7 +17,7 @@ export const BoardsPage = () => {
   }
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen" style={{fontFamily: "serif"}}>
       <div className="p-8 pt-40 flex flex-col items-center justify-center">
         <h1 className="text-xl font-bold">棋譜表示</h1>
         <p>棋譜ID：{boardId}</p>
