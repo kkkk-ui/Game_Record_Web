@@ -1,20 +1,35 @@
-name: Deploy to Vercel
+name: Vercel Deployment
 
 on:
   push:
     branches:
       - main
 
+env:
+  NODE_VERSION: "24.11.0"
+
+permissions:
+  contents: read
+  deployments: write
+
 jobs:
-  deploy:
+  deploy-production:
     runs-on: ubuntu-latest
+    env:
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+          cache-dependency-path: game-record-app/package-lock.json
 
       - name: Install dependencies
         working-directory: game-record-app
@@ -24,13 +39,10 @@ jobs:
         run: npm install -g vercel@latest
 
       - name: Pull Vercel Environment Information
-        working-directory: game-record-app
-        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+        run: vercel pull --yes --environment=production --token=$VERCEL_TOKEN
 
-      - name: Build Project
-        working-directory: game-record-app
-        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Build Project Artifacts
+        run: vercel build --prod --token=$VERCEL_TOKEN
 
-      - name: Deploy to Vercel
-        working-directory: game-record-app
-        run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Deploy Project Artifacts to Vercel
+        run: vercel deploy --prebuilt --prod --token=$VERCEL_TOKEN
