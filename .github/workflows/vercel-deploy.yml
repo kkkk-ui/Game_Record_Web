@@ -1,39 +1,37 @@
 name: Deploy to Vercel
 
-# mainブランチにpushをトリガーにする
 on:
   push:
     branches:
-      - main 
+      - main
 
-# ジョブを定義
-jobs: 
+jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check out the code
-        uses: actions/checkout@v3   # リポジトリのコードをクローンする
+      - uses: actions/checkout@v3
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3 # node.jsをセットアップする
+      - uses: actions/setup-node@v3
         with:
-          node-version: '20'        # nodeのバージョン20を指定
+          node-version: '20'
 
       - name: Install dependencies
         working-directory: game-record-app
-        run: npm install            # 依存関係をインストール
+        run: npm install
 
       - name: Build Next.js project
         working-directory: game-record-app
         env:
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
           NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
-        run: npm run build          # ビルドする
+        run: npm run build
 
       - name: Deploy to Vercel
-        uses: amondnet/vercel-action@v25 # Vercelにデプロイする。
-        with:                            # with以降に必要なパラメータを渡す
+        uses: amondnet/vercel-action@v25
+        with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          working-directory: game-record-app
+
