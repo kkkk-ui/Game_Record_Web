@@ -10,9 +10,16 @@ type NavItem = {
 const NAV_ITEMS: NavItem[] = [
   { href: "/search", label: "棋譜検索"},
   { href: "/mypage", label: "マイページ"},
-  { href: "/auth/login", label: "ログイン"},
-  { href: "/auth/signup", label: "新規登録"}
+  { href: "/mypage", label: "ログイン"},
+  { href: "/mypage", label: "新規登録"}
 ]
+
+// const NAV_ITEMS: NavItem[] = [
+//   { href: "/search", label: "棋譜検索"},
+//   { href: "/mypage", label: "マイページ"},
+//   { href: "/auth/login", label: "ログイン"},
+//   { href: "/auth/signup", label: "新規登録"}
+// ]
 
 const NAV_style = "mx-5 text-xl text-center border-b-2 border-transparent hover:border-indigo-500 transition duration-300 ease-in-out"
 

@@ -17,7 +17,7 @@ export const GameRecord = () => {
     return(
         <div className="relative">
             <div className="absolute top-20 left-1/2 -translate-x-1/2 flex flex-col items-center">
-                <p className="p-3 text-2xl md:text-3xl">
+                <p className="p-3 text-2xl md:text-3xl" style={{fontFamily: "serif"}}>
                     棋譜検索
                 </p>
                 <form onSubmit={handleSearch}>
