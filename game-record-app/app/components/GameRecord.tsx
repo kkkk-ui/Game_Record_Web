@@ -26,7 +26,7 @@ export const GameRecord = () => {
                         value={text}
                         onChange={(e) => setText(e.target.value)}
                         placeholder="製品番号を入力してください"
-                        className="p-2 text-sm shadow-lg rounded-2xl bg-gray-300 focus:outline-none min-w-[60dvw] md:text-xl md:min-w-[30dvw] md:max-w-[40dvw]"
+                        className="p-2 text-sm drop-shadow-lg rounded-2xl bg-gray-300 focus:outline-none min-w-[60dvw] md:text-xl md:min-w-[30dvw] md:max-w-[40dvw]"
                     />
                 </form>
                 {openRecord &&(
