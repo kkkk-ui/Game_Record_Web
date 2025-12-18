@@ -19,6 +19,7 @@ jobs:
       VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
       VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
       VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      VERCEL_TEAM_SLUG: ${{ secrets.VERCEL_TEAM_SLUG }} # optional（チーム運用なら設定）
 
     steps:
       - name: Checkout repository
@@ -39,10 +40,26 @@ jobs:
         run: npm install -g vercel@latest
 
       - name: Pull Vercel Environment Information
-        run: vercel pull --yes --environment=production --token=$VERCEL_TOKEN
+        run: |
+          rm -rf game-record-app/.vercel
+          SCOPE_ARGS=()
+          if [ -n "${VERCEL_TEAM_SLUG:-}" ]; then
+            SCOPE_ARGS+=(--scope "$VERCEL_TEAM_SLUG")
+          fi
+          vercel pull --yes --environment=production --token="$VERCEL_TOKEN" --cwd game-record-app "${SCOPE_ARGS[@]}"
 
       - name: Build Project Artifacts
-        run: vercel build --prod --token=$VERCEL_TOKEN
+        run: |
+          SCOPE_ARGS=()
+          if [ -n "${VERCEL_TEAM_SLUG:-}" ]; then
+            SCOPE_ARGS+=(--scope "$VERCEL_TEAM_SLUG")
+          fi
+          vercel build --prod --token="$VERCEL_TOKEN" --cwd game-record-app "${SCOPE_ARGS[@]}"
 
       - name: Deploy Project Artifacts to Vercel
-        run: vercel deploy --prebuilt --prod --token=$VERCEL_TOKEN
+        run: |
+          SCOPE_ARGS=()
+          if [ -n "${VERCEL_TEAM_SLUG:-}" ]; then
+            SCOPE_ARGS+=(--scope "$VERCEL_TEAM_SLUG")
+          fi
+          vercel deploy --prebuilt --prod --token="$VERCEL_TOKEN" --cwd game-record-app "${SCOPE_ARGS[@]}"
