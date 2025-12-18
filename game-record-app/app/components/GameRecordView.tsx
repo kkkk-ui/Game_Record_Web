@@ -43,7 +43,7 @@ export const GameRecordView: React.FC<RecordViewProps> = ({boardId}) => {
 
     return(
         <div className="min-h-[50dvh]">
-            <div className="grid grid-cols-5 gap-2 w-fit border p-5 bg-gray-800">
+            <div className="grid grid-cols-5 gap-2 w-fit border p-5 bg-gray-800 drop-shadow-lg rounded-lg">
                 {currentBoard?.map((row, r) =>
                     row.map((cell, c) => (
                     <div
@@ -79,7 +79,7 @@ export const GameRecordView: React.FC<RecordViewProps> = ({boardId}) => {
             <div className="flex items-center justify-center gap-4 m-4">
                 <button
                     onClick={() => setCurrentIndex((i) => Math.max(i - 1, 0))}
-                    className="px-4 py-1 rounded bg-gray-300 transition hover:scale-110"
+                    className="px-4 py-1 rounded-md drop-shadow-lg bg-gray-300 transition hover:scale-110"
                 >
                     前
                 </button>
@@ -90,7 +90,7 @@ export const GameRecordView: React.FC<RecordViewProps> = ({boardId}) => {
 
                 <button
                     onClick={() => setCurrentIndex((i) => Math.min(i + 1, boardrecords.length - 1))}
-                    className="px-4 py-1 rounded bg-gray-300 transition hover:scale-110"
+                    className="px-4 py-1 rounded-md drop-shadow-lg bg-gray-300 transition hover:scale-110"
                 >
                     後
                 </button>

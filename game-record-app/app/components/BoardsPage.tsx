@@ -19,8 +19,8 @@ export const BoardsPage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-red-50 via-teal-50 to-cyan-50 " style={{fontFamily: "serif"}}>
       <div className="p-8 pt-40 flex flex-col items-center justify-center">
-        <h1 className="text-xl font-bold">棋譜表示</h1>
-        <p>棋譜ID：{boardId}</p>
+        <h1 className="text-xl font-bold p-1">棋譜表示</h1>
+        <p className="p-1">棋譜ID：{boardId}</p>
         <GameRecordView boardId={boardId} />
       </div>
     </div>
