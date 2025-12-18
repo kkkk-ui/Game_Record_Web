@@ -7,5 +7,6 @@ export const fetchBoardRecord = async (boardId: string) => {
       board_number,
       board
     `)
-    .eq("board_id", boardId);
+    .eq("board_id", boardId)
+    .order("board_number", { ascending: true });
 };

@@ -2,6 +2,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import * as Query from "@/app/services/boardrecord";
+import Image from "next/image";
 
 interface RecordViewProps {
   boardId: string;
@@ -31,6 +32,7 @@ export const GameRecordView: React.FC<RecordViewProps> = ({boardId}) => {
         const fetchBoardRecords = async () => {
             if (!boardId) return;
             const {data, error} = await Query.fetchBoardRecord(boardId);
+            console.log(data);
             if (error){
                 console.error(error);
             }
@@ -55,7 +57,21 @@ export const GameRecordView: React.FC<RecordViewProps> = ({boardId}) => {
                         bg-gray-600
                         "
                     >
-                        {cell !== 0 ? cell : ""}
+                        {/* {cell !== 0 ? cell : ""} */}
+                        {cell !== 0 && (
+                            <Image
+                                src={cell === 1 ? "/pawn1.svg" :
+                                     cell === -1 ? "/pawn2.svg" :
+                                     cell === 2 ? "/knight1.svg" :
+                                     cell === -2 ? "/knight2.svg" :
+                                     cell === 3 ? "king1.svg":"king2.svg"}
+                                alt="chess"
+                                width={50}
+                                height={50}
+                            />
+                        )}
+                        
+    
                     </div>
                     ))
                 )}
