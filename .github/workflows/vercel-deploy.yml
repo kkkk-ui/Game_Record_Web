@@ -63,3 +63,4 @@ jobs:
             SCOPE_ARGS+=(--scope "$VERCEL_TEAM_SLUG")
           fi
           vercel deploy --prebuilt --prod --token="$VERCEL_TOKEN" --cwd game-record-app "${SCOPE_ARGS[@]}"
+
