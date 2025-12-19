@@ -48,6 +48,7 @@ export const GameRecordList:React.FC<RecordProps> = ({productId}) => {
                             shadow-lg shadow-blue-500/30
                             transition
                             hover:bg-blue-400 hover:scale-110
+                            active:scale-95
                             "
                         >
                             閲覧
