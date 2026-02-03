@@ -67,18 +67,18 @@ export const GameRecordView: React.FC<RecordViewProps> = ({ boardId }) => {
                         flex items-center justify-center
                         border
                         text-white
-                        ${(r + c + 1) % 2 === 0 ? "bg-gray-600/50" : "bg-gray-400"}
+                        ${(r + c + 1) % 2 === 0 ? "bg-slate-600" : "bg-slate-400"}
                         `}
                         >
                             {/* 駒の画像表示処理部分 */}
                             {cell !== 0 && (
                                 <Image
-                                    src={cell === 1 ? "/pawn1.svg" :
-                                        cell === -1 ? "/pawn2.svg" :
+                                    src={cell === 1 ? "/knight1.svg" :
+                                        cell === -1 ? "/knight2.svg" :
                                             cell === 2 ? "/bishop1.svg" :
                                                 cell === -2 ? "/bishop2.svg" :
-                                                    cell === 3 ? "/knight1.svg" :
-                                                        cell === -3 ? "/knight2.svg" :
+                                                    cell === 3 ? "/pawn1.svg" :
+                                                        cell === -3 ? "/pawn2.svg" :
                                                             cell === 4 ? "/queen1.svg" :
                                                                 cell === -4 ? "/queen2.svg" :
                                                                     cell === 5 ? "/king1.svg" :
