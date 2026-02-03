@@ -3,7 +3,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 
 export const Home = () => {
-    return(
+    return (
         <div>
             <div className="relative">
                 <img
@@ -25,18 +25,18 @@ export const Home = () => {
                 <span className="text-xl md:text-3xl font-bold tracking-widest">
                     現実の対局をリアルタイム記録
                 </span>
-                <br/>
+                <br />
                 <span className="text-sm md:text-lg font-light opacity-80">
                     熱い一戦を、最高のAI分析で振り返り、次の道筋を導く
                 </span>
-                <br/>
+                <br />
                 <span className="text-sm md:text-lg font-light opacity-80">
                     あなたの隣に新しい戦略を
                 </span>
             </div>
         </div>
 
-        
+
     );
 }
 
