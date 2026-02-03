@@ -3,6 +3,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import * as Query from "@/app/services/boardrecord";
 import Image from "next/image";
+import { EvaluationBar } from './EvaluationBar';
 
 interface RecordViewProps {
     boardId: string;
@@ -55,84 +56,88 @@ export const GameRecordView: React.FC<RecordViewProps> = ({ boardId }) => {
     }, [isPlaying, currentIndex]);
 
     return (
-        <div className="min-h-[50dvh]">
-            <div className="grid grid-cols-5 gap-2 w-fit border p-5 bg-gray-800 drop-shadow-lg rounded-lg">
-                {currentBoard?.map((row, r) =>
-                    row.map((cell, c) => (
-                        <div
-                            key={`${r}-${c}`}
-                            className={`
-                        w-12 h-12
-                        md:w-16 md:h-16
-                        flex items-center justify-center
-                        border
-                        text-white
-                        ${(r + c + 1) % 2 === 0 ? "bg-slate-600" : "bg-slate-400"}
-                        `}
+        <div className="min-w-[60dvw] min-h-[50dvh] md:flex flex-row items-center justify-center gap-16">
+            <div className="w-full md:w-1/2 flex flex-col items-center justify-center">
+                <div className="grid grid-cols-5 gap-2 w-fit border p-5 bg-gray-800 drop-shadow-lg rounded-lg">
+                    {currentBoard?.map((row, r) =>
+                        row.map((cell, c) => (
+                            <div
+                                key={`${r}-${c}`}
+                                className={`
+                            w-12 h-12
+                            md:w-16 md:h-16
+                            flex items-center justify-center
+                            border
+                            text-white
+                            ${(r + c + 1) % 2 === 0 ? "bg-slate-600" : "bg-slate-400"}
+                            `}
+                            >
+                                {/* 駒の画像表示処理部分 */}
+                                {cell !== 0 && (
+                                    <Image
+                                        src={cell === 1 ? "/knight1.svg" :
+                                            cell === -1 ? "/knight2.svg" :
+                                                cell === 2 ? "/bishop1.svg" :
+                                                    cell === -2 ? "/bishop2.svg" :
+                                                        cell === 3 ? "/pawn1.svg" :
+                                                            cell === -3 ? "/pawn2.svg" :
+                                                                cell === 4 ? "/queen1.svg" :
+                                                                    cell === -4 ? "/queen2.svg" :
+                                                                        cell === 5 ? "/king1.svg" :
+                                                                            cell === -5 ? "/king2.svg" : ""}
+                                        alt="chess"
+                                        width={50}
+                                        height={50}
+                                    />
+                                )}
+
+
+                            </div>
+                        ))
+                    )}
+                </div>
+                <div className="w-full flex flex-col items-center justify-center">
+                    <div className="flex items-center justify-center gap-8 m-4">
+                        <button
+                            onClick={() => setCurrentIndex((i) => Math.max(i - 1, 0))}
+                            className="px-4 py-1 rounded-md drop-shadow-lg bg-gray-300 transition hover:scale-110 active:scale-95"
                         >
-                            {/* 駒の画像表示処理部分 */}
-                            {cell !== 0 && (
-                                <Image
-                                    src={cell === 1 ? "/knight1.svg" :
-                                        cell === -1 ? "/knight2.svg" :
-                                            cell === 2 ? "/bishop1.svg" :
-                                                cell === -2 ? "/bishop2.svg" :
-                                                    cell === 3 ? "/pawn1.svg" :
-                                                        cell === -3 ? "/pawn2.svg" :
-                                                            cell === 4 ? "/queen1.svg" :
-                                                                cell === -4 ? "/queen2.svg" :
-                                                                    cell === 5 ? "/king1.svg" :
-                                                                        cell === -5 ? "/king2.svg" : ""}
-                                    alt="chess"
-                                    width={50}
-                                    height={50}
-                                />
-                            )}
+                            戻る
+                        </button>
 
+                        <span>
+                            手数：{boardrecords[currentIndex]?.board_number}
+                        </span>
 
-                        </div>
-                    ))
-                )}
-            </div>
-            <div className="flex flex-col items-center justify-center">
-                <div className="flex items-center justify-center gap-4 m-4">
-                    <button
-                        onClick={() => setCurrentIndex((i) => Math.max(i - 1, 0))}
-                        className="px-4 py-1 rounded-md drop-shadow-lg bg-gray-300 transition hover:scale-110 active:scale-95"
-                    >
-                        戻る
-                    </button>
-
-                    <span>
-                        手数：{boardrecords[currentIndex]?.board_number}
-                    </span>
-
-                    <button
-                        onClick={() => setCurrentIndex((i) => Math.min(i + 1, boardrecords.length - 1))}
-                        className="px-4 py-1 rounded-md drop-shadow-lg bg-gray-300 transition hover:scale-110 active:scale-95"
-                    >
-                        進む
-                    </button>
-                </div>
-                <div className="w-full flex items-center justify-center">
-                    <input
-                        type="range"
-                        min="0"
-                        max={boardrecords.length - 1}
-                        value={currentIndex}
-                        onChange={(e) => setCurrentIndex(Number(e.target.value))}
-                        className="flex-grow h-2 bg-gray-200 rounded-lg cursor-pointer accent-blue-500"
-                    />
-                    <button
-                        onClick={() => setIsPlaying(!isPlaying)}
-                        className="flex-shrink-0 m-2 p-1 bg-red-500 text-white rounded-lg shadow-lg 
-                                   shadow-red-500/30 w-10 h-10 flex items-center justify-center transition hover:bg-red-400 hover:scale-105 active:scale-95"
-                    >
-                        {isPlaying ? "■" : "▶"}
-                    </button>
+                        <button
+                            onClick={() => setCurrentIndex((i) => Math.min(i + 1, boardrecords.length - 1))}
+                            className="px-4 py-1 rounded-md drop-shadow-lg bg-gray-300 transition hover:scale-110 active:scale-95"
+                        >
+                            進む
+                        </button>
+                    </div>
+                    <div className="w-full flex items-center justify-center">
+                        <input
+                            type="range"
+                            min="0"
+                            max={boardrecords.length - 1}
+                            value={currentIndex}
+                            onChange={(e) => setCurrentIndex(Number(e.target.value))}
+                            className="flex-grow h-2 bg-gray-200 rounded-lg cursor-pointer accent-blue-500"
+                        />
+                        <button
+                            onClick={() => setIsPlaying(!isPlaying)}
+                            className="flex-shrink-0 m-2 p-1 bg-red-500 text-white rounded-lg shadow-lg 
+                                    shadow-red-500/30 w-10 h-10 flex items-center justify-center transition hover:bg-red-400 hover:scale-105 active:scale-95"
+                        >
+                            {isPlaying ? "■" : "▶"}
+                        </button>
+                    </div>
                 </div>
             </div>
-
+            <div className="w-full md:w-1/2 p-4 bg-white rounded-lg shadow-lg">
+                {currentBoard && <EvaluationBar board={currentBoard.map(row => row.map(String))} />}
+            </div>
         </div>
     );
 };
