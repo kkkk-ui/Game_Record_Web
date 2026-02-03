@@ -2,7 +2,7 @@ export const rule = () => {
     return (
         <div className="min-h-screen bg-gradient-to-br from-red-50 via-teal-50 to-cyan-50">
             <div className="p-8 pt-40 flex flex-col items-center justify-center">
-                <h1 className="text-2xl font-bold p-1">5x5チェスの遊び方</h1>
+                <h1 className="text-3xl font-bold p-1">5x5チェスの遊び方</h1>
                 <p>通常のチェスを5×5のコンパクトな盤面に凝縮したミニチェスです。短時間で決着がつくスピーディーな展開と、狭い盤面ならではの密度の高い駆け引きが楽しめます。</p>
             </div>
 
